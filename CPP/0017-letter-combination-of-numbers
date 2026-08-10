@@ -1,0 +1,34 @@
+class Solution {
+public:
+    vector<string> answer;
+
+    vector<string> phone = {
+        "", "", "abc", "def", "ghi",
+        "jkl", "mno", "pqrs", "tuv", "wxyz"
+    };
+
+    void solve(string digits, int index, string current) {
+
+        if (index == digits.length()) {
+            answer.push_back(current);
+            return;
+        }
+
+        string letters = phone[digits[index] - '0'];
+
+        for (int i = 0; i < letters.length(); i++) {
+            solve(digits, index + 1, current + letters[i]);
+        }
+    }
+
+    vector<string> letterCombinations(string digits) {
+
+        if (digits.empty()) {
+            return {};
+        }
+
+        solve(digits, 0, "");
+
+        return answer;
+    }
+};
